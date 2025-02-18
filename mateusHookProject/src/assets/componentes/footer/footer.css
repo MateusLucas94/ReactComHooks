@@ -1,0 +1,11 @@
+.footer {
+  background-color: #3e4854;
+  box-sizing: border-box;
+  color: #fff;
+  display: flex;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  justify-content: flex-end;
+  margin-top: 10%;
+  padding: 8px 10%;
+  width: 100%;
+}

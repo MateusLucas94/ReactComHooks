@@ -1,0 +1,16 @@
+.header {
+  background-color: #022c16;
+  box-shadow: 0 0 8px #333;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 16px 10%;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.header-user {
+  color: #fff;
+  font-family: Courier New, Courier, monospace;
+  font-weight: bold;
+}
