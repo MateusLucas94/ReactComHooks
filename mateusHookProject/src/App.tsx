@@ -12,7 +12,11 @@ import Button from "./assets/componentes/button";
 import "./App.css";
 
 function App() {
-  function handleClick() {}
+  const [counter, setCounter] = useState(0);
+
+  function handleClick() {
+    setCounter(counter + 1);
+  }
 
   // function handleClick(messageText: string) {
   //   alert(messageText);
@@ -30,7 +34,7 @@ function App() {
     <div className="app">
       <Header />
       <div className="container">
-        <Button onClick={handleClick}> Botão 1</Button>
+        <Button onClick={handleClick}> {counter}</Button>
       </div>
       {/* <div className="container">
         <Title>
