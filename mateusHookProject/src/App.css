@@ -26,6 +26,32 @@
 .images-container img {
   width: 45%;
 }
+.books-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Espaçamento entre os elementos */
+  width: 100%;
+  max-width: 400px; /* Define um limite de largura */
+  margin: 20px auto; /* Centraliza no container */
+}
+
+.books-form input {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  outline: none;
+  transition: border 0.3s ease-in-out;
+}
+
+.books-form input:focus {
+  border-color: #007bff;
+}
+
+.books-form button {
+  margin-top: 10px; /* Espaçamento extra entre o último input e o botão */
+  align-self: center; /* Centraliza o botão dentro do form */
+}
 
 /* button {
   background: linear-gradient(135deg, #007bff, #0056b3);
