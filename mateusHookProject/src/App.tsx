@@ -11,11 +11,12 @@ import { booksList } from "./data";
 // import interstellarSrc from "./assets/interstellarSrc.jpg";
 
 import "./App.css";
+import { BookType } from "./type";
 
 function App() {
   const [bookTitle, setBookTitle] = useState("");
   const [booksPages, setBooksPages] = useState(0);
-  const [books, setBooks] = useState(booksList);
+  const [books, setBooks] = useState<BookType[]>([]);
 
   function handleNameChange(event: React.ChangeEvent<HTMLInputElement>) {
     setBookTitle(event.target.value);
