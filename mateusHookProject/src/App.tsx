@@ -14,29 +14,37 @@ import "./App.css";
 import { BookType } from "./type";
 
 function App() {
-  const [bookTitle, setBookTitle] = useState("");
-  const [booksPages, setBooksPages] = useState(0);
+  const [formData, setFormData] = useState({ title: "", pages: 0 });
+  // const [bookTitle, setBookTitle] = useState("");
+  // const [booksPages, setBooksPages] = useState(0);
   const [books, setBooks] = useState<BookType[]>([]);
   const [errorMessages, setErrorMessages] = useState<string[]>([]);
 
-  function handleNameChange(event: React.ChangeEvent<HTMLInputElement>) {
-    // condicional para que o input aceite apenas strings
-    // if (isNaN(Number(value))) { // Verifica se não é número
-    //   setBookTitle(value); // Atualiza o estado com a string
-    // } else {
-    //   alert("Por favor, insira apenas letras no título.");
-    // }
-    setBookTitle(event.target.value);
+  function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
+    setFormData((prevData) => ({
+      ...prevData,
+      [event.target.name]: event.target.value,
+    }));
   }
 
-  function handlePagesChange(event: React.ChangeEvent<HTMLInputElement>) {
-    setBooksPages(event.target.valueAsNumber);
-  }
+  // function handleNameChange(event: React.ChangeEvent<HTMLInputElement>) {
+  //   // condicional para que o input aceite apenas strings
+  //   // if (isNaN(Number(value))) { // Verifica se não é número
+  //   //   setBookTitle(value); // Atualiza o estado com a string
+  //   // } else {
+  //   //   alert("Por favor, insira apenas letras no título.");
+  //   // }
+  //   setBookTitle(event.target.value);
+  // }
+
+  // function handlePagesChange(event: React.ChangeEvent<HTMLInputElement>) {
+  //   setBooksPages(event.target.valueAsNumber);
+  // }
 
   function updateState() {
     const newBook = {
-      title: bookTitle,
-      pages: booksPages,
+      title: formData.title,
+      pages: formData.pages,
       isRead: false,
       isFavorite: false,
     };
@@ -44,20 +52,19 @@ function App() {
   }
 
   function resetForm() {
-    setBookTitle("");
-    setBooksPages(0);
+    setFormData({ title: "", pages: 0 });
   }
 
   function isFormValid() {
     const errors = [];
 
     // Validar bookTitle
-    if (bookTitle === "") {
+    if (formData.title === "") {
       errors.push("O campo Título é obrigatorio.");
     }
 
     // Validar booksPages
-    if (booksPages <= 0) {
+    if (formData.pages <= 0) {
       errors.push("O número de páginas do livro precisa ser maior que zero!");
     }
     setErrorMessages(errors);
@@ -109,14 +116,16 @@ function App() {
           <input
             placeholder="Título"
             type="text"
-            value={bookTitle}
-            onChange={handleNameChange}
+            name="title"
+            value={formData.title}
+            onChange={handleChange}
           />
           <input
             placeholder="Quantidade de Paginas"
             type="number"
-            value={booksPages}
-            onChange={handlePagesChange}
+            name="pages"
+            value={formData.pages}
+            onChange={handleChange}
           />
           {errorMessages.length > 0 && (
             <div className="form-message">
