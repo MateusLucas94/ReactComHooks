@@ -1,6 +1,6 @@
 type ButtonProps = {
   children: React.ReactNode;
-  onClick: () => void;
+  onClick?: () => void;
 };
 
 import "./button.css";

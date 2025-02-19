@@ -6,7 +6,7 @@ import Book from "./assets/componentes/book";
 import Title from "./assets/componentes/title";
 // import { bestMovie, booksList } from "./data";
 import Button from "./assets/componentes/button";
-import { booksList } from "./data";
+// import { booksList } from "./data";
 
 // import interstellarSrc from "./assets/interstellarSrc.jpg";
 
@@ -17,8 +17,15 @@ function App() {
   const [bookTitle, setBookTitle] = useState("");
   const [booksPages, setBooksPages] = useState(0);
   const [books, setBooks] = useState<BookType[]>([]);
+  const [errorMessages, setErrorMessages] = useState<string[]>([]);
 
   function handleNameChange(event: React.ChangeEvent<HTMLInputElement>) {
+    // condicional para que o input aceite apenas strings
+    // if (isNaN(Number(value))) { // Verifica se não é número
+    //   setBookTitle(value); // Atualiza o estado com a string
+    // } else {
+    //   alert("Por favor, insira apenas letras no título.");
+    // }
     setBookTitle(event.target.value);
   }
 
@@ -26,7 +33,7 @@ function App() {
     setBooksPages(event.target.valueAsNumber);
   }
 
-  function handleClick() {
+  function updateState() {
     const newBook = {
       title: bookTitle,
       pages: booksPages,
@@ -34,6 +41,36 @@ function App() {
       isFavorite: false,
     };
     setBooks([...books, newBook]);
+  }
+
+  function resetForm() {
+    setBookTitle("");
+    setBooksPages(0);
+  }
+
+  function isFormValid() {
+    const errors = [];
+
+    // Validar bookTitle
+    if (bookTitle === "") {
+      errors.push("O campo Título é obrigatorio.");
+    }
+
+    // Validar booksPages
+    if (booksPages <= 0) {
+      errors.push("O número de páginas do livro precisa ser maior que zero!");
+    }
+    setErrorMessages(errors);
+    return errors.length === 0;
+  }
+
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    if (isFormValid()) {
+      updateState();
+      resetForm();
+      setErrorMessages([]);
+    }
   }
 
   // function handleClick(messageText: string) {
@@ -67,7 +104,8 @@ function App() {
           <img src={interstellarSrc} alt="Poster 1 interstellar" />
           <img src="/interstellarPublic.jpg" alt="Poster 2 interstellar" />
           </div> */}
-        <div className="books-form">
+
+        <form className="books-form" onSubmit={handleSubmit} action="">
           <input
             placeholder="Título"
             type="text"
@@ -80,10 +118,17 @@ function App() {
             value={booksPages}
             onChange={handlePagesChange}
           />
-          <Button onClick={handleClick}>
+          {errorMessages.length > 0 && (
+            <div className="form-message">
+              {errorMessages.map((message) => (
+                <p key={message}>{message}</p>
+              ))}
+            </div>
+          )}
+          <Button>
             <strong>Adicionar</strong>
           </Button>
-        </div>
+        </form>
 
         {/* <Button onClick={() => handleClick("Não, Ele é muito demorado!")}>
           <strong>Posso assistir sem medo?</strong>

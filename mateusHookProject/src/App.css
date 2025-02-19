@@ -53,6 +53,13 @@
   align-self: center; /* Centraliza o botão dentro do form */
 }
 
+.form-message {
+  color: #e22859;
+  border-left: 3px solid #e22859;
+  padding: 8px;
+  background-color: #fafafa;
+}
+
 /* button {
   background: linear-gradient(135deg, #007bff, #0056b3);
   color: white;
