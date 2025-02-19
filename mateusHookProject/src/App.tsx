@@ -4,8 +4,9 @@ import Header from "./assets/componentes/header";
 import Footer from "./assets/componentes/footer";
 import Book from "./assets/componentes/book";
 import Title from "./assets/componentes/title";
+import Form from "./assets/componentes/form";
 // import { bestMovie, booksList } from "./data";
-import Button from "./assets/componentes/button";
+// import Button from "./assets/componentes/button";
 // import { booksList } from "./data";
 
 // import interstellarSrc from "./assets/interstellarSrc.jpg";
@@ -14,18 +15,18 @@ import "./App.css";
 import { BookType } from "./type";
 
 function App() {
-  const [formData, setFormData] = useState({ title: "", pages: 0 });
+  const [books, setBooks] = useState<BookType[]>([]);
+  // const [formData, setFormData] = useState({ title: "", pages: 0 });
   // const [bookTitle, setBookTitle] = useState("");
   // const [booksPages, setBooksPages] = useState(0);
-  const [books, setBooks] = useState<BookType[]>([]);
-  const [errorMessages, setErrorMessages] = useState<string[]>([]);
+  // const [errorMessages, setErrorMessages] = useState<string[]>([]);
 
-  function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
-    setFormData((prevData) => ({
-      ...prevData,
-      [event.target.name]: event.target.value,
-    }));
-  }
+  // function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
+  //   setFormData((prevData) => ({
+  //     ...prevData,
+  //     [event.target.name]: event.target.value,
+  //   }));
+  // }
 
   // function handleNameChange(event: React.ChangeEvent<HTMLInputElement>) {
   //   // condicional para que o input aceite apenas strings
@@ -41,44 +42,44 @@ function App() {
   //   setBooksPages(event.target.valueAsNumber);
   // }
 
-  function updateState() {
+  function updateState(title: string, pages: number) {
     const newBook = {
-      title: formData.title,
-      pages: formData.pages,
+      title: title,
+      pages: pages,
       isRead: false,
       isFavorite: false,
     };
     setBooks([...books, newBook]);
   }
 
-  function resetForm() {
-    setFormData({ title: "", pages: 0 });
-  }
+  // function resetForm() {
+  //   setFormData({ title: "", pages: 0 });
+  // }
 
-  function isFormValid() {
-    const errors = [];
+  // function isFormValid() {
+  //   const errors = [];
 
-    // Validar bookTitle
-    if (formData.title === "") {
-      errors.push("O campo Título é obrigatorio.");
-    }
+  //   // Validar bookTitle
+  //   if (formData.title === "") {
+  //     errors.push("O campo Título é obrigatorio.");
+  //   }
 
-    // Validar booksPages
-    if (formData.pages <= 0) {
-      errors.push("O número de páginas do livro precisa ser maior que zero!");
-    }
-    setErrorMessages(errors);
-    return errors.length === 0;
-  }
+  //   // Validar booksPages
+  //   if (formData.pages <= 0) {
+  //     errors.push("O número de páginas do livro precisa ser maior que zero!");
+  //   }
+  //   setErrorMessages(errors);
+  //   return errors.length === 0;
+  // }
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    if (isFormValid()) {
-      updateState();
-      resetForm();
-      setErrorMessages([]);
-    }
-  }
+  // function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  //   e.preventDefault();
+  //   if (isFormValid()) {
+  //     updateState();
+  //     resetForm();
+  //     setErrorMessages([]);
+  //   }
+  // }
 
   // function handleClick(messageText: string) {
   //   alert(messageText);
@@ -106,13 +107,16 @@ function App() {
             <Book book={book} key={book.title} />
           ))}
         </ul>
+
+        <Form submitFunction={updateState} />
+
         {/* <Title>{bestMovie}</Title>
         <div className="images-container">
           <img src={interstellarSrc} alt="Poster 1 interstellar" />
           <img src="/interstellarPublic.jpg" alt="Poster 2 interstellar" />
           </div> */}
 
-        <form className="books-form" onSubmit={handleSubmit} action="">
+        {/* <form className="books-form" onSubmit={handleSubmit} action="">
           <input
             placeholder="Título"
             type="text"
@@ -137,7 +141,7 @@ function App() {
           <Button>
             <strong>Adicionar</strong>
           </Button>
-        </form>
+        </form> */}
 
         {/* <Button onClick={() => handleClick("Não, Ele é muito demorado!")}>
           <strong>Posso assistir sem medo?</strong>
