@@ -46,6 +46,18 @@ function Form({ submitFunction }: FormProps) {
     }
   }
 
+  // Impede a digitação de letras e sinais de adição e subtração
+  function handleKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
+    if (
+      event.key === "e" ||
+      event.key === "E" ||
+      event.key === "+" ||
+      event.key === "-"
+    ) {
+      event.preventDefault(); // Impede a digitação dessas teclas
+    }
+  }
+
   return (
     <form className="books-form" onSubmit={handleSubmit} action="">
       <input
@@ -61,6 +73,7 @@ function Form({ submitFunction }: FormProps) {
         name="pages"
         value={formData.pages}
         onChange={handleChange}
+        onKeyDown={handleKeyDown}
       />
       {errorMessages.length > 0 && (
         <div className="form-message">
