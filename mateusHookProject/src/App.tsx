@@ -7,7 +7,7 @@ import Title from "./assets/componentes/title";
 import Form from "./assets/componentes/form";
 // import { bestMovie, booksList } from "./data";
 // import Button from "./assets/componentes/button";
-// import { booksList } from "./data";
+import { booksList } from "./data";
 
 // import interstellarSrc from "./assets/interstellarSrc.jpg";
 
@@ -43,14 +43,37 @@ function App() {
   // }
 
   function updateState(title: string, pages: number) {
-    const newBook = {
-      title: title,
-      pages: pages,
-      isRead: false,
-      isFavorite: false,
-    };
+    // Procurando se o livro já existe na booksList
+    const existingBook = booksList.find(
+      (book) =>
+        book.title.toLowerCase() === title.toLowerCase() && book.pages === pages
+    );
+
+    // Criando um novo livro com os valores corretos
+    const newBook = existingBook
+      ? { ...existingBook } // Se existe, usa os valores originais
+      : {
+          title,
+          pages,
+          isRead: false,
+          isFavorite: false,
+        };
+
+    console.log("Livro adicionado:", newBook); // Verifica no console o que está sendo armazenado
+
     setBooks([...books, newBook]);
   }
+
+  //FUNÇÃO PRINCIPAL DO UPDATESTATE
+  // function updateState(title: string, pages: number) {
+  //   const newBook = {
+  //     title: title,
+  //     pages: pages,
+  //     isRead: false,
+  //     isFavorite: false,
+  //   };
+  //   setBooks([...books, newBook]);
+  // }
 
   // function resetForm() {
   //   setFormData({ title: "", pages: 0 });

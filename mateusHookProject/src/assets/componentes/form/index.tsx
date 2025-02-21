@@ -13,7 +13,10 @@ function Form({ submitFunction }: FormProps) {
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     setFormData((prevData) => ({
       ...prevData,
-      [event.target.name]: event.target.value,
+      [event.target.name]:
+        event.target.name === "pages"
+          ? Number(event.target.value)
+          : event.target.value,
     }));
   }
 

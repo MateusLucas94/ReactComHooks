@@ -6,6 +6,7 @@ type BookProps = {
 };
 
 function Book({ book }: BookProps) {
+  console.log("Renderizando livro:", book);
   const favoriteClass = book.isFavorite ? "favorite-book" : "";
   return (
     <li className={`book-item ${favoriteClass}`}>
